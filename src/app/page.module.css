@@ -1,0 +1,14 @@
+.App_header{
+    top: 0;
+    position: fixed;  
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+}
+
+.productlistcontainer{
+    display: flex;
+    flex-wrap: wrap;  
+    justify-content: center;
+    margin-top: 100px;
+}
