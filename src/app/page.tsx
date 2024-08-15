@@ -26,10 +26,10 @@ export default function Home() {
     let obj = { "width": "100%","height": "200px", "object-fit": "cover"};
     for (let productitem of listdata) {
       arr.push(<div key={productitem['id']} className={styles.card}>
-        {productitem['images'][0] && <img src={productitem['images'][0]} style={obj} className="card-image"></img>}
-        <div className="card-body">
-          <h3 className="card-title">{productitem['title']}</h3>
-          <p className="card-content">{productitem['price']}</p>
+        {productitem['images'][0] && <img src={productitem['images'][0]} style={obj} className={styles.card_image}></img>}
+        <div className={styles.card_body}>
+          <h3 className={styles.card_title}>{productitem['title']}</h3>
+          <p className={styles.card_content}>{productitem['price']}</p>
           <button>Add to Cart</button>
         </div>
       </div>)
