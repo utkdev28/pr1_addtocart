@@ -8,14 +8,13 @@ import { createContext, useEffect, useState } from "react";
 export default function Home() {
   const [listdata,setlistdata] = useState([]);
   const [listpage,setlistpage]:any=useState([]);
-  //debugger;
-  const [cartpagedata,setcartpagedata]:any = useState([]);
+  let arr = JSON.parse(localStorage.getItem('cartdata')|| '') || [];
+  const [cartpagedata,setcartpagedata]:any = useState(arr);
   const MyContext = createContext({});
 
 
 
   function onAddtoCart(_oEvent: any,id:number){
-    //debugger;
     setcartpagedata((prev:Array<number>)=>[...prev,id]);
   }
 

@@ -63,7 +63,7 @@ export default function MyCartList() {
                 <button className={styles.increment_button}>+</button>
               </div>
             </div>
-            <button onClick={(evt)=>{onremovefromCart(evt,productObj['id'])}}>Remove item</button>
+            <button className={styles.removeButton} onClick={(evt)=>{onremovefromCart(evt,productObj['id'])}}>Remove item</button>
           </div>
         </li>
       );
