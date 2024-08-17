@@ -3,22 +3,24 @@ import Link from "next/link";
 import styles from "./page.module.css";
 
 
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export default function Home() {
   const [listdata,setlistdata] = useState([]);
   const [listpage,setlistpage]:any=useState([]);
-  debugger;
+  //debugger;
   const [cartpagedata,setcartpagedata]:any = useState([]);
+  const MyContext = createContext({});
+
 
 
   function onAddtoCart(_oEvent: any,id:number){
-    debugger;
+    //debugger;
     setcartpagedata((prev:Array<number>)=>[...prev,id]);
   }
 
   useEffect(()=>{
-    console.log(cartpagedata);
+    localStorage.setItem('cartdata',JSON.stringify(cartpagedata));
   },[cartpagedata])
 
   useEffect(()=>{
