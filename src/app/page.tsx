@@ -11,12 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   const [listdata,setlistdata] = useState([]);
-  const [listpage,setlistpage]:any=useState([]);
+  const [listpagehtml,setlistpagehtml]:any=useState([]);
   const [cartpagedata,setcartpagedata]:any = useState([]);
-  const MyContext = createContext({});
 
 
-
+  // called on click of add to cart button
   function onAddtoCart(_oEvent: any,id:number){
     let newCartdata:Array<Number> = [];
     setcartpagedata((prev:Array<number>)=>{
@@ -29,16 +28,10 @@ export default function Home() {
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
+      pauseOnHover: true
     });
   }
-
-  // useEffect(()=>{
-  //   localStorage.setItem('cartdata',JSON.stringify(cartpagedata));
-  // },[cartpagedata])
-
+  //intial JSON file load and setting to use state
   useEffect(()=>{
     async function fetchDatafromJSON() {
       if(listdata.length >0 )
@@ -56,7 +49,7 @@ export default function Home() {
     fetchDatafromJSON();
     return;
   },[])
-  // useEffect with dependent on Data load to rerender on Screen
+  // HTML preprations with dependent on Data load to rerender on Screen
   useEffect(()=>{
     if(listdata.length ==0)
       return;
@@ -73,9 +66,7 @@ export default function Home() {
         </div>
       </div>)
     }
-    console.log('Reached here')
-    console.table(listpage);
-    setlistpage(arr);
+    setlistpagehtml(arr);
   }, [listdata])
 
   return (
@@ -88,7 +79,7 @@ export default function Home() {
           </Link>
       </h2>
       <div className={styles.productlistcontainer}>
-          {listpage}
+          {listpagehtml}
       </div>
     </>
   );
