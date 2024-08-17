@@ -24,7 +24,7 @@ export default function Home() {
       localStorage.setItem('cartdata',JSON.stringify(newCartdata))
       return newCartdata;
     });
-    toast.info(`Item ${id} added to Cart!` ,{
+    toast.success(`Item ${id} added to Cart!` ,{
       position: "bottom-center",
       autoClose: 2000,
       hideProgressBar: false,
@@ -49,7 +49,7 @@ export default function Home() {
       let arr = await res.json();
       console.log(arr);
       setlistdata(arr);
-      let cartarr = JSON.parse(window.localStorage.getItem('cartdata')|| '') || [];
+      let cartarr = JSON.parse(window.localStorage.getItem('cartdata')|| JSON.stringify('')) || [];
       setcartpagedata(cartarr);
       localStorage.setItem('cartdata',JSON.stringify(cartarr));
     }
