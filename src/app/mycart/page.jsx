@@ -13,7 +13,8 @@ export default function MyCartList() {
   function onremovefromCart(event,id){
     delete checkoutDatacount[id];
     let bagData = JSON.parse(localStorage.getItem('cartdata'));
-    bagData.splice(bagData.indexOf(id),1);
+    while(bagData.indexOf(id) >= 0)
+      bagData.splice(bagData.indexOf(id),1);
     localStorage.setItem('cartdata',JSON.stringify(bagData));
     setcheckoutDatacount(Object.assign({}, checkoutDatacount) );
   }
@@ -47,13 +48,13 @@ export default function MyCartList() {
         </div>) ;
       console.log(productObj);
       return (
-        <li className={styles.card_li}>
+        <li className={styles.card_li} key={productObj['id']}>
           <div className={styles.img_title}>
             <img src={productObj['images'][0]} className={styles.cartPage_img}></img>
-            <div key={productObj['id']}>{productObj && <div> {productObj['title']} </div>}</div>
+            <div key={productObj['id']}>{productObj && <div>{productObj['title']} ({productObj['price']}) </div>}</div>
           </div>
           <div className={styles.rightdiv}>
-            <div>{productObj['price']}</div>
+            <div>{Number(productObj['price']) * Number(checkoutDatacount[productObj['id']])}</div>
             <div>
               <div className={styles.increment_div}>
                 <button className={styles.increment_button}>-</button>

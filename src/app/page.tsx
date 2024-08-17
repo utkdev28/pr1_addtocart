@@ -4,23 +4,40 @@ import styles from "./page.module.css";
 
 
 import { createContext, useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 export default function Home() {
   const [listdata,setlistdata] = useState([]);
   const [listpage,setlistpage]:any=useState([]);
-  let arr = JSON.parse(localStorage.getItem('cartdata')|| '') || [];
-  const [cartpagedata,setcartpagedata]:any = useState(arr);
+  const [cartpagedata,setcartpagedata]:any = useState([]);
   const MyContext = createContext({});
 
 
 
   function onAddtoCart(_oEvent: any,id:number){
-    setcartpagedata((prev:Array<number>)=>[...prev,id]);
+    let newCartdata:Array<Number> = [];
+    setcartpagedata((prev:Array<number>)=>{
+      newCartdata = [...prev,id]
+      localStorage.setItem('cartdata',JSON.stringify(newCartdata))
+      return newCartdata;
+    });
+    toast.info(`Item ${id} added to Cart!` ,{
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
-  useEffect(()=>{
-    localStorage.setItem('cartdata',JSON.stringify(cartpagedata));
-  },[cartpagedata])
+  // useEffect(()=>{
+  //   localStorage.setItem('cartdata',JSON.stringify(cartpagedata));
+  // },[cartpagedata])
 
   useEffect(()=>{
     async function fetchDatafromJSON() {
@@ -32,6 +49,9 @@ export default function Home() {
       let arr = await res.json();
       console.log(arr);
       setlistdata(arr);
+      let cartarr = JSON.parse(window.localStorage.getItem('cartdata')|| '') || [];
+      setcartpagedata(cartarr);
+      localStorage.setItem('cartdata',JSON.stringify(cartarr));
     }
     fetchDatafromJSON();
     return;
@@ -49,6 +69,7 @@ export default function Home() {
           <h3 className={styles.card_title}>{productitem['title']}</h3>
           <p className={styles.card_content}>{productitem['price']}</p>
           <button onClick={(evt)=>{onAddtoCart(evt,productitem['id'])}} className={styles.card_button}>Add to Cart</button>
+          <ToastContainer />
         </div>
       </div>)
     }
@@ -57,19 +78,13 @@ export default function Home() {
     setlistpage(arr);
   }, [listdata])
 
-  function NavtoCartPage(){
-    window.location.pathname = '/mycart';
-  }
-
   return (
     <>
       <h2 className={styles.App_header}>Welcome to X-Cart
           <Link href={'/mycart'} className={styles.myCart_buttom}>
-            <button onClick={NavtoCartPage}>
               <span >ICON</span>
               <span >Cart</span>
               <span>2</span>
-            </button>
           </Link>
       </h2>
       <div className={styles.productlistcontainer}>
