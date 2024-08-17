@@ -3,7 +3,11 @@
     position: fixed;  
     z-index: 100;
     width: 100%;
-    text-align: center;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15px;
+    align-items: center;
 }
 
 .productlistcontainer{
@@ -48,4 +52,33 @@ font-size: 1rem;
 color: #777;
 margin-top: 8px;
 }
-  
+
+.card_button {
+    background-color: #7878ed;
+    color: white;
+    border: aliceblue;
+    font-size: medium;
+    border-radius: 7px 5px 5px 7px;
+    width: -webkit-fill-available;
+    height: 50px;
+    cursor: grab;
+}
+
+.myCart_buttom {
+    border-radius: 7px ;
+    width: 100px;
+    background-color: #7878ed;
+    color: white;
+    border: aliceblue;
+    font-size: medium;
+    margin-right: 50px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.myCart_Counter{
+
+}
+.myCart_SVG{
+    background: url(../../public/cart.svg);
+}
