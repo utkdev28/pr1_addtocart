@@ -74,11 +74,10 @@ margin-top: 8px;
     margin-right: 50px;
     cursor: pointer;
     padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
 }
 
-.myCart_Counter{
-
-}
-.myCart_SVG{
-    background: url(../../public/cart.svg);
+.count_css{
 }

@@ -1,8 +1,8 @@
 'use client';
 import Link from "next/link";
 import styles from "./page.module.css";
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { createContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +13,7 @@ export default function Home() {
   const [listdata,setlistdata] = useState([]);
   const [listpagehtml,setlistpagehtml]:any=useState([]);
   const [cartpagedata,setcartpagedata]:any = useState([]);
+  const [count,setcount] = useState(0);
 
 
   // called on click of add to cart button
@@ -21,6 +22,7 @@ export default function Home() {
     setcartpagedata((prev:Array<number>)=>{
       newCartdata = [...prev,id]
       localStorage.setItem('cartdata',JSON.stringify(newCartdata))
+      setcount(newCartdata.length);
       return newCartdata;
     });
     toast.success(`Item ${id} added to Cart!` ,{
@@ -45,6 +47,7 @@ export default function Home() {
       let cartarr = JSON.parse(window.localStorage.getItem('cartdata')|| JSON.stringify('')) || [];
       setcartpagedata(cartarr);
       localStorage.setItem('cartdata',JSON.stringify(cartarr));
+      setcount(cartarr.length);
     }
     fetchDatafromJSON();
     return;
@@ -73,9 +76,10 @@ export default function Home() {
     <>
       <h2 className={styles.App_header}>Welcome to X-Cart
           <Link href={'/mycart'} className={styles.myCart_buttom}>
-              <span >ICON</span>
-              <span >Cart</span>
-              <span>2</span>
+              <FontAwesomeIcon icon={faCartShopping} />
+              {/* <FontAwesomeIcon icon="fa-regular fa-cart-shopping" /> */}
+              <span >My Cart</span>
+              <span className={styles.count_css}>{count}</span>
           </Link>
       </h2>
       <div className={styles.productlistcontainer}>
