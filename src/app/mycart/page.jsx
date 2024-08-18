@@ -119,6 +119,8 @@ export default function MyCartList() {
       <p>
         Total Price: ${total}
       </p>
+      {total > 500 && <p> Discount: ${10*Math.floor(total/500)}</p>}
+      {total > 500 && <p>Final Price:{total-(10*(Math.floor(total/500)))} </p>}
       <ul className={styles.cartPage_ul}>
         {checkoutpageHtml}
         <ToastContainer />
